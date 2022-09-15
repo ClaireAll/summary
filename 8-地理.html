@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地理</title>
+</head>
+
+<body>
+    <button onclick="test()">点击测试地理</button>
+    <p></p>
+    <p></p>
+    <p></p>
+    <script>
+        function test() {
+            var ps = document.querySelectorAll("p");
+
+            function successCallback(position) {
+                var coords = position.coords.latitude + "------" + position.coords.longitude;
+                ps[0].innerHTML = "获取用户位置成功！";
+                ps[1].innerHTML = coords;
+            }
+
+            function errorCallback(error) {
+                ps[0].innerHTML = "获取用户位置失败！";
+                ps[1].innerHTML = error;
+            }
+
+            // navigation 导航
+            if (navigator.geolocation) {
+                // 如果支持，获取用户地理信息
+                navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+            }
+        }
+    </script>
+</body>
+
+</html>

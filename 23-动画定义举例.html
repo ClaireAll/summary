@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            margin: 100px;
+            background-color: red;
+
+            /* 调用动画 */
+            /* animation: 动画名称  持续时间  执行次数  是否反向  运动曲线  延迟执行  infinite */
+            animation: move2 4s infinite;
+        }
+
+        /* 方式一 定义一组动画 */
+        @keyframes move1 {
+            from {
+                transform: translateX(0px) rotate(0deg);
+            }
+
+            to {
+                transform: translateX(500px) rotate(555deg);
+            }
+        }
+
+        @keyframes move2 {
+            0% {
+                transform: translateX(0px) translateY(0px);
+                background-color: red;
+                border-radius: 0;
+            }
+
+            25% {
+                transform: translateX(550px) translateY(0px);
+                background-color: blueviolet;
+                border-radius: 25px;
+            }
+
+            50% {
+                transform: translateX(550px) translateY(200px);
+                background-color: yellowgreen;
+                border-radius: 50px;
+            }
+
+            75% {
+                transform: translateX(0px) translateY(200px);
+                background-color: brown;
+                border-radius: 25px;
+            }
+
+            100% {
+                transform: translateX(0px) translateY(0px);
+                background-color: red;
+                border-radius: 0;
+            }
+        }
+
+        .clock {
+            width: 3px;
+            height: 100px;
+            background-color: black;
+            margin: 110px auto;
+            transform-origin: center bottom; /* 旋转的中心点是底部 */
+            animation: myClock 60s steps(60) infinite;
+        }
+
+        @keyframes myClock {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div class="clock"></div>
+</body>
+
+</html>

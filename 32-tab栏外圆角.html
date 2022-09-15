@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .content {
+            width: 500px;
+            height: 40px;
+            background: #CCCCCC;
+            margin: 50px auto;
+            display: flex;
+        }
+
+        .item {
+            width: 100px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .is_active {
+            position: relative;
+            background: #f1f1f1;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .is_active:before,
+        .is_active:after {
+            display: block;
+            position: absolute;
+            content: "";
+            width: 10px;
+            height: 10px;
+            background-color: pink;
+            bottom: 0px;
+        }
+
+        .is_active:before {
+            left: -10px;
+        }
+
+        .is_active:after {
+
+            right: -10px;
+
+        }
+
+        .text {
+            /* position: relative;
+            display: block;
+            width: 100px;
+            height: 35px; */
+            line-height: 35px;
+        }
+
+        /* .text:before,
+        .text:after {
+            display: block;
+            position: absolute;
+            z-index: 99;
+            content: "";
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            background-color: white;
+            bottom: 0px;
+        } */
+
+        /* .text:before {
+            right: -20px;
+        }
+
+        .text:after {
+            left: -20px;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="item">1</div>
+        <div class="item is_active">
+            <a href="#" class="text">2</a>
+        </div>
+        <div class="item">3</div>
+    </div>
+</body>
+
+</html>

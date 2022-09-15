@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>offset</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            margin: 100px;
+            border: 10px solid #000;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- js中有一套方便的获取元素尺寸的办法就是offset家族。offset家族包括：
+        offsetWidth 获取元素的宽高 + padding + border，不包括margin
+        offsetHight 这两个属性，他们绑定在了所有的节点元素上。
+        offsetLeft 当前元素相对于其定位父元素的垂直偏移量。
+        offsetTop 当前元素相对于其定位父元素的水平偏移量。 从父亲的 padding 开始算起，父亲的 border 不算在内。
+        offsetParent 获取当前元素的定位父元素。
+    -->
+    <div class="box"></div>
+
+    <!-- 如果当前元素的父元素，有CSS定位（position为absolute、relative、fixed），
+        那么 offsetParent 获取的是最近的那个父元素。
+        如果当前元素的父元素，没有CSS定位（position为absolute、relative、fixed），
+        那么offsetParent 获取的是body。
+    -->
+    <script>
+        !(function () {
+            var div = document.querySelector(".box");
+            console.log("offsetWidth: " + div.offsetWidth);
+            console.log("offsetHeight: " + div.offsetHeight);
+            console.log("offsetParent: " + div.offsetParent);
+            console.log("offsetTop: " + div.offsetTop);
+            console.log("offsetLeft: " + div.offsetLeft);
+        })()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节点信息</title>
+</head>
+
+<body>
+    <div id="box" value="Claire">
+        一夜暴富
+    </div>
+    <script>
+        !(function () {
+            var element = document.getElementById("box"); // 获取元素节点（标签）
+            var attribute = element.getAttributeNode("id"); // 获取box的属性节点
+            var txt = element.firstChild; // 获取box的文本节点
+
+            var value = element.getAttribute("id"); // 获取id的属性值
+
+            console.log(element);
+            console.log("--------");
+            console.log(attribute);
+            console.log("--------");
+            console.log(txt);
+            console.log("--------");
+            console.log(value);
+        })();
+    </script>
+</body>
+
+</html>

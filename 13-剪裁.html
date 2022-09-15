@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>剪裁</title>
+    <style>
+        div {
+            text-align: center;
+            margin: 20px;
+
+        }
+
+        img {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            /* 裁剪出圆形区域 */
+            clip-path: circle(100px at 200px 200px);
+            transition: clip-path .4s;
+        }
+
+        img:hover {
+            /* 鼠标悬停时，裁剪出更大的圆形 */
+            clip-path: circle(200px at 200px 200px);
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+        <img src="./img/1.jpg" alt="图片">
+    </div>
+</body>
+
+</html>

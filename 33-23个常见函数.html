@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23个常见函数</title>
+    <style>
+        #btn {
+            width: 100px;
+            height: 100px;
+            background-color: antiquewhite;
+        }
+        #bottom-btn {
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+            margin-top: 1000px;
+        }
+    </style>
+</head>
+<body>
+    <div id="btn"></div>
+    <div id="bottom-btn"></div>
+    <script>
+        window.onload = function () {
+            // 1、生成随机颜色
+            const generateRandomHexColor = () => `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
+            console.log("生成随机颜色：" + generateRandomHexColor());
+
+            // 2、数组重新排序
+            const shuffle = (arr) => arr.sort(() => Math.random() - 0.5);
+            const arr = [1, 2, 3, 4, 5];
+            console.log("数组重新排序：" + shuffle(arr));
+
+            // 3、复制到剪贴板
+            const copyToClipBoard = (text) => navigator.clipboard && navigator.clipboard.writeText && navigator.clipboard.writeText(text);
+            console.log("数组重新排序：" + copyToClipBoard("hello world!"));
+
+            // 4、检测深色主题
+            const isDarkMode = (text) => window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+            console.log("检测深色主题：" + isDarkMode());
+
+            // 5、滚动到顶部
+            // 将元素滚动到顶部的最简单方法是使用 scrollIntoView。设置块开始滚动到顶部；将行为设置为平滑以启用平滑滚动。
+            const scrollToTop = (element) => element.scrollIntoView({ behavior: "smooth", block: "start" });
+
+            // 6、滚动到底部
+            const scrollToBottom = (element) => element.scrollIntoView({ behavior: "smooth", block: "end" });
+
+            // 7、检测元素是否在屏幕上
+            // 检查元素是否在窗口中的最佳方法是使用 IntersectionObserver。
+            const callback = (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        // `entry.target` is the dom element
+                        console.log(`${entry.target.id} is visible`);
+                    }
+                });
+            };
+
+            const options = {
+                // threshold: 1.0,
+                root: null
+            };
+
+            const observer = new IntersectionObserver(callback, options);
+            const btn = document.getElementById("btn");
+            const bottomBtn = document.getElementById("bottom-btn");
+            observer.observe(btn);
+            observer.observe(bottomBtn);
+
+            // 8、检测设备
+            const detectDeviceType = () =>
+                /Android|webOS|iPhone|iPad|BlackBerry|IEMobile|Opera Mini/i.test(
+                    navigator.userAgent
+                ) ? "Mobile" : "Desktop";
+
+            console.log("检测设备：" + detectDeviceType());
+
+            // 9、隐藏元素
+            // 我们可以将元素的 style.visibility 设置为 hidden 来隐藏元素的可见性，但是，元素的空间还是会被占用。将元素的 style.display 设置为 none 将从渲染流中删除该元素。
+            const hideElement = (el, removeFromFlow = false) => {
+                removeFromFlow ? (el.style.display = "none") : (el.style.visibility = 'hidden');
+            };
+
+            // 10、从URL获取参数
+            const getParamByUrl = (key) => {
+                const url = new URL(location.href);
+
+                return url.searchParams.get(key);
+            };
+
+            // 11、深拷贝对象
+            const deepCopy = obj => JSON.parse(JSON.stringify(obj));
+
+            // 12、等待功能
+            const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+            const asyncFn = async() => {
+                await wait(1000);
+                console.log('Waiting for an asynchronous to finish executing');
+            }
+
+            asyncFn();
+
+            // 13、有条件地在对象中添加属性
+            const isValid = false;
+            const age = 18;
+
+            const person = {
+                id: "ad32",
+                name: "Claire",
+                ...(isValid && { isActive: true }),
+                ...((age >= 18 || isValid) && { cart: 0 }),
+            };
+
+            console.log(person);
+
+            // 14、检查对象中是否有该属性
+            console.log('name' in person);
+
+            // 15、使用动态键破坏对象
+            const productData = {
+                id: "23",
+                name: "Claire",
+            };
+            const { name: deviceName } = productData;
+            console.log('deviceName', deviceName);
+
+            const extractKey = 'name';
+            const { [extractKey]: data } = productData;
+            console.log('data', data);
+
+            // 16、循环访问对象以访问键值
+            const data_16 = {
+                id: 16,
+                name: "Claire",
+                isScale: false,
+            };
+            Object.entries(data).forEach(([key, value]) => {
+                if (['id', 'name'].includes(key)) {
+                    console.log('key :', key, ' value :', value);
+                }
+            });
+
+            // 17、防止在使用可选链(?.)访问对象中不存在的任何键时抛出错误
+            // ?. ?.()
+
+            // 18、检查数组中的 falsy值
+
+            // 19、删除数组中的重复值
+            const fruitList = ['apple', 'mango', 'apple', 'grapes'];
+            const uniqFruitList = [...new Set(fruitList)];
+            console.log(uniqFruitList);
+
+            // 20、校验值是否是数组类型
+            // Array.isArray()
+
+            // 21、字符串到数字和数字到字符串的转换使用'+'操作符
+
+            // 22、当值为 null 且 undefined 时，使用空值合并 (??) 运算符有条件地分配其他值
+
+            // 23、使用 !! 进行布尔转换操作符
+        }
+    </script>
+</body>
+</html>

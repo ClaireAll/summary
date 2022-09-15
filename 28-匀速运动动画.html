@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>匀速运动动画</title>
+    <style>
+        .container {
+            margin: 0;
+            padding: 5px;
+            height: 300px;
+            background-color: #ddd;
+            position: relative;
+        }
+
+        button {
+            margin: 5px;
+        }
+
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: rebeccapurple;
+            position: absolute;
+            left: 195px;
+            top: 40px;
+        }
+
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: yellowgreen;
+            position: absolute;
+            left: 0;
+            top: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button>运动到 left=200px</button>
+        <button>运动到 left=400px</button>
+        <div class="box1"></div>
+        <div class="box2"></div>
+    </div>
+
+    <script>
+        !(function () {
+            var box1 = document.querySelector(".box1");
+            var box2 = document.querySelector(".box2");
+            var btnArr = document.getElementsByTagName("button");
+
+            // 绑定事件
+            btnArr[0].onclick = function () {
+                animate(box1, 200);
+                animate(box2, 200);
+            }
+
+            btnArr[1].onclick = function () {
+                animate(box1, 400);
+                animate(box2, 400);
+            }
+
+            function animate(ele, target) {
+                // 要用定时器，先清除定时器
+                //一个盒子只能有一个定时器，这样的话，不会和其他盒子出现定时器冲突
+                //我们可以把定时器本身，当成为盒子的一个属性
+                clearInterval(ele.timer);
+
+                var speed = target > ele.offsetLeft ? 10 : -10;  //speed指的是步长
+                ele.timer = setInterval(function () {
+                    //在执行之前就获取当前值和目标值之差
+                    var gap = target - ele.offsetLeft;
+
+                    //移动的过程中，如果目标值和当前值之差如果小于步长，那么就不能在前进了
+                    //因为步长有正有负，所有转换成绝对值来比较
+                    if (Math.abs(gap) < Math.abs(speed)) {
+                        ele.style.left = target + "px";
+                        clearInterval(ele.timer);
+                    } else {
+                        ele.style.left = ele.offsetLeft + speed + "px";
+                    }
+                }, 30);
+            }
+        })()
+    </script>
+</body>
+</html>

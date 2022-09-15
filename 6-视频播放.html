@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入字体图标的文件 -->
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <title>视频</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 多媒体标题 */
+        figcaption {
+            text-align: center;
+            line-height: 150px;
+            font-family: "Microsoft Yahei";
+            font-size: 24px;
+        }
+
+        /* 播放器 */
+        .player {
+            width: 720px;
+            height: 360px;
+            margin: 10px auto;
+            border: 1px solid black;
+            position: relative;
+            border-radius: 20px;
+        }
+
+        .player video {
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* 控制条 */
+        .controls {
+            width: 700px;
+            height: 40px;
+            background-color: rgba(255, 255, 0, 0.3);
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            border-radius: 10px;
+        }
+
+        /* 开关 */
+        .switch {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 10px;
+            bottom: 10px;
+            border-radius: 10px;
+
+            text-align: center;
+            line-height: 20px;
+            color: yellow;
+            background-color: aquamarine;
+        }
+
+        /* 进度条 */
+        .progress {
+            width: 432px;
+            height: 10px;
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.4);
+            left: 40px;
+            top: 15px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        /* 当前进度 */
+        .curr-progress {
+            width: 50%;
+            height: 10px;
+            background-color: aliceblue;
+        }
+
+        /* 时间模块 */
+        .time {
+            width: 120px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            color: aliceblue;
+            position: absolute;
+            left: 510px;
+            top: 10px;
+            font-size: 12px;
+        }
+
+        .extend {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: 20px;
+            top: 10px;
+            text-align: center;
+            line-height: 20px;
+            color: yellow;
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <figure>
+        <figcaption>视频案例</figcaption>
+        <div class="player">
+            <video src="./vedio/may.mp4"></video>
+            <div class="controls">
+                <!-- 播放暂停 -->
+                <a href="#" class="switch icon-play"></a>
+                <div class="progress">
+                    <!-- 当前进度 -->
+                    <div class="curr-progress"></div>
+                </div>
+                <!-- 时间 -->
+                <div class="time">
+                    <span class="curr-time">00:00:00</span>
+                    <span class="total-time">00:00:00</span>
+                </div>
+                <!-- 全屏 -->
+                <a href="#" class="extend icon-resize-full"></a>
+            </div>
+        </div>
+    </figure>
+    <script>
+        // 思路
+        // 1.点击按钮 实现播放并且切换图标
+        // 2.算出视频的总时长并显示
+        // 3.当视频播放的时候，进度条同步，当前时间同步
+        // 4.点击实现全屏
+
+        // 需要获取的标签
+        var video = document.querySelector('video');
+        var playBtn = document.querySelector('.switch');
+        var currProgress = document.querySelector('.curr-progress');
+        var currTime = document.querySelector('.curr-time');
+        var totalTime = document.querySelector('.total-time');
+        var extend = document.querySelector('.extend');
+
+        var tTime = 0;
+
+        // 1.点击按钮 实现播放并且切换图标
+        playBtn.onclick = function () {
+            // 如果视频播放，就暂停，反之
+            if (video.paused) {
+                video.play();
+                // 切换图标
+                this.classList.remove('icon-play');
+                this.classList.add('icon-pause');
+            } else {
+                video.pause();
+                this.classList.remove('icon-pause');
+                this.classList.add('icon-play');
+            }
+        }
+
+        // 2.算出视频的总时长并显示
+        // 当视频加载完成后的事件，视频能播放的时候
+        video.oncanplay = function () {
+            tTime = video.duration;
+            console.log(tTime);
+
+            var h = Math.floor(tTime / 3600);
+            var m = Math.floor(tTime % 3600 / 60);
+            var s = Math.floor(tTime % 60);
+
+            h = h >= 10 ? h : "0" + h;
+            m = m >= 10 ? m : "0" + m;
+            s = s >= 10 ? s : "0" + s;
+
+            totalTime.innerHTML = h + ":" + m + ":" + s;
+        }
+
+        // 3.当视频播放的时候，进度条同步，当前时间同步
+        // 当当前时间更新的时候触发
+        video.ontimeupdate = function () {
+            var currentTime = video.currentTime;
+
+            var h = Math.floor(currentTime / 3600);
+            var m = Math.floor(currentTime % 3600 / 60);
+            var s = Math.floor(currentTime % 60);
+
+            h = h >= 10 ? h : "0" + h;
+            m = m >= 10 ? m : "0" + m;
+            s = s >= 10 ? s : "0" + s;
+
+            currTime.innerHTML = h + ":" + m + ":" + s;
+
+            // 改变进度条的宽度
+            var divide = currentTime / tTime;
+            currProgress.style.width = divide * 100 + "%";
+        }
+
+        // 4.全屏
+        extend.onclick = function () {
+            // 全屏的h5代码
+            video.webkitRequestFullScreen();
+        }
+    </script>
+</body>
+
+</html>

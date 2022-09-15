@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画</title>
+    <style>
+        div {
+            width: 800px;
+            height: 600px;
+            margin: 0 auto;
+            /* 透视 :加给变换的父盒子*/
+            /* 设置的是用户的眼睛距离 平面的距离*/
+            /* 透视效果只是视觉上的呈现，并不是正真的3d*/
+            perspective: 110px;
+
+        }
+
+        img {
+            width: 800px;
+            height: 600px;
+            transition: transform 5s;
+        }
+
+        img:hover {
+            transform: rotateX(180deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src="./img/1.jpg" alt="">
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖拽</title>
+    <style>
+        .one {
+            width: 400px;
+            height: 400px;
+            border: 1px solid black;
+        }
+
+        .one > div, .two > div {
+            width: 98px;
+            height: 98px;
+            border: 1px solid black;
+            border-radius: 50%;
+            background-color: brown;
+            float: left;
+            text-align: center;
+            line-height: 98px;
+        }
+
+        .two {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            border: 1px solid black;
+            left: 600px;
+            top: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="one">
+        <div draggable="true">1</div>
+        <div draggable="true">2</div>
+        <div draggable="true">3</div>
+        <div draggable="true">4</div>
+        <div draggable="true">5</div>
+        <div draggable="true">6</div>
+        <div draggable="true">7</div>
+        <div draggable="true">8</div>
+    </div>
+    <div class="two"></div>
+    <script>
+        var boxes = document.querySelectorAll(".one div");
+        var one = document.querySelector(".one");
+        var two = document.querySelector(".two");
+
+        var tmp = null;
+
+        // 给8个小圈分别绑定拖拽事件
+
+        for (var i = 0; i < boxes.length; i++) {
+            boxes[i].ondragstart = function () {
+                tmp = this;
+                console.log(tmp);
+            }
+
+            boxes[i].ondragend = function () {
+                tmp = null;
+                console.log(tmp);
+            }
+        }
+
+        one.ondragover = function (e) {
+            e.preventDefault();
+        }
+
+        one.ondrop = function () {
+            this.appendChild(tmp);
+        }
+
+        two.ondragover = function(e) {
+            e.preventDefault();
+        }
+
+        two.ondrop = function () {
+            // 将拖拽的元素追到two里
+            this.appendChild(tmp);
+        }
+    </script>
+</body>
+</html>

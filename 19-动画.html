@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 200px;
+        }
+        .box {
+            background-color: green;
+
+            /* 如果设置width：只让宽度在变化是进行过渡 */
+            transition: all 2s linear 0s;
+        }
+
+        .box:hover {
+            width: 500px;
+            background-color: goldenrod;
+        }
+
+        .box2 {
+            background-color: blue;
+            transition: all 1s;
+        }
+        .box2:hover {
+            transform: scale(2, 0.5);
+            background-color: palevioletred;
+        }
+        .box3 {
+            transition: all 1s;
+            background-color: greenyellow;
+        }
+        .box3:hover {
+            transform: translate(-50%, -50%);
+        }
+        .box4 {
+            transition: all 1s;
+            background-color: blanchedalmond;
+        }
+        .box4:hover {
+            transform: rotate(450deg);
+            transform-origin: center bottom; /*旋转时，以盒子底部的中心为坐标原点*/
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div class="box2">缩放</div>
+    <div class="box3">位移</div>
+    <div class="box4">旋转</div>
+</body>
+
+</html>

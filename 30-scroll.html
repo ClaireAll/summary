@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scroll</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            margin: 3px;
+            border: 8px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        静，能寒窗苦守；动，能点石成金。
+        静，能寒窗苦守；动，能点石成金。
+        静，能寒窗苦守；动，能点石成金。
+        静，能寒窗苦守；动，能点石成金。
+        静，能寒窗苦守；动，能点石成金。
+        静，能寒窗苦守；动，能点石成金。
+    </div>
+    <script>
+        !(function () {
+            // ScrollWidth 和 scrollHeight：获取元素整个滚动区域的宽、高。包括 width 和 padding，不包括 border和margin。
+            // scrollLeft：获取水平滚动条滚动的距离。
+            // scrollTop：获取垂直滚动条滚动的距离。
+            // 当某个元素满足scrollHeight - scrollTop == clientHeight时，说明垂直滚动条滚动到底了。
+            // 当某个元素满足scrollWidth - scrollLeft == clientWidth时，说明水平滚动条滚动到底了。
+
+            var div = document.getElementsByTagName("div")[0];
+
+            // `scrollHeight` 的特点是：如果内容超出了盒子，`scrollHeight`为内容的高（包括超出的内容）；如果不超出，`scrollHeight`为盒子本身的高度。
+            //IE8以下（不包括IE8），为盒子本身内容的高度。
+            console.log(div.scrollWidth);
+            console.log(div.scrollHeight);
+
+
+        })();
+    </script>
+</body>
+
+</html>
