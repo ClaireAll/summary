@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可视区域client</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /**
+     * 三大家族 offset/scroll/client的区别
+     * 1、宽高
+     *  offsetWidth = width + padding + border
+     *  offsetHeight = height + padding + border
+     *  scrollWidth = 内容宽度(不包含border)
+     *  scrollHeight = 内容高度(不包含border)
+     *  clientWidth = width + padding
+     *  clientHeight = height + padding
+     *
+     * 2、上左
+     *  offsetTop/offsetLeft
+     *  ·调用者：任意元素
+     *  ·作用：距离父盒子中带有定位的距离
+     *
+     *  scrollTop/scrollLeft
+     *  ·调用者：document.body.scrollTop(window调用)，盒子也可以调用，但是得有滚动条
+     *  ·作用：浏览器无法无法显示的部分
+     *
+     *  clientY/clientX
+     *  ·调用者：event
+     *  ·作用：鼠标距离浏览器可视区域的距离（左、上）
+     */
+
+    // 函数封装：获取浏览器的宽高（可视区域）
+    function client() {
+        if (window.innerHeight !== undefined) {
+            // ie9及其以上的版本的写法
+            return {
+                width: window.innerWidth,
+                height: window.innerHeight,
+            };
+        } else if (document.compatMode === "CSS1Compat") {
+            // 标准模式的写法（有DTD时）
+            return {
+                width: document.documentElement.clientWidth,
+                height: document.documentElement.clientHeight,
+            };
+        } else {
+            // 没有DTD的写法
+            return {
+                width: document.body.clientWidth,
+                height: document.body.clientHeight,
+            };
+        }
+    }
+
+    // 实例：根据不同的浏览器大小，给不同的背景色
+    // >960 红色 <640绿色  中间蓝色
+    window.onresize = fn; // 页面发生大小时执行该函数
+    fn();
+
+    function fn() {
+        if (client().width > 960) {
+            document.body.style.backgroundColor = "red";
+        } else if (client().width < 480) {
+            document.body.style.backgroundColor = "green";
+        } else {
+            document.body.style.backgroundColor = "blue";
+        }
+    }
+</script>
+
+</html>
