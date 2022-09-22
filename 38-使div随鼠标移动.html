@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>div随鼠标移动</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: antiquewhite;
+            /* 开启box的绝对定位 */
+            position: absolute;
+        }
+        #box-container {
+            width: 1000px;
+            height: 400px;
+            background-color: aquamarine;
+            border: 2px solid rebeccapurple;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box-container">
+        <div id="box1"></div>
+    </div>
+    <script>
+        window.onload = function () {
+            // 使div可以跟随鼠标移动
+            var box1 = document.getElementById("box1");
+            var container = document.getElementById("box-container");
+
+            // 给整个页面绑定：鼠标移动事件
+            container.onmousemove = function (event) {
+                // 兼容的方式获取event对象
+                event = event || container.event;
+
+                // 鼠标在页面的位置 = 滚动条滚动的距离 + 可视区域的坐标。
+                var pageX = event.pageX || scroll().left + event.clientX;
+                var pageY = event.pageY || scroll().top + event.clientY;
+
+                // 设置div的偏移量（相对于整个页面）
+                // 注意，如果想通过style.left 来设置属性，一定要给div1开启绝对定位。
+                box1.style.left = Math.min(pageX, 900) + "px";
+                box1.style.top = Math.min(pageY, 300) + "px";
+            }
+        }
+
+        // scroll 函数封装
+        function scroll() {
+            return {
+                //此函数的返回值是对象
+                left: window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop,
+                right: window.pageXOffset || document.body.scrollLeft || document.documentElement.scrollLeft
+            };
+        }
+    </script>
+</body>
+
+</html>
