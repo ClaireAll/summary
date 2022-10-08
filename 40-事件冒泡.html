@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件冒泡</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box1 {
+            width: 300px;
+            height: 300px;
+            background-color: aquamarine;
+        }
+
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background-color: bisque;
+            /* 开启绝对定位 */
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <script>
+        !(function () {
+            var box2 = document.querySelector("#box2");
+
+            // 给整个页面绑定，鼠标移动事件
+            document.onmousemove = function (event) {
+                //兼容的方式获取event对象
+                event = event || window.event;
+
+                var pageX = event.pageX || (scroll().left + event.clientX);
+                var pageY = event.pageY || (scroll().top + event.clientY);
+
+                box2.style.left = pageX + "px";
+                box2.style.top = pageY + "px";
+            };
+
+            // 当 document.onmousemove 和 box2.onmousemove 同时触发时，通过  box2 阻止事件向 document 冒泡。
+            // 也就是说，只要是在 box2 的区域，就只触发 document.onmousemove 事件
+
+            var box1 = document.querySelector("#box1");
+            box1.onmousemove = function (event) {
+                // 阻止冒泡
+                event = event || window.event;
+
+                if (event && event.stopPropagation) {
+                    event.stopPropagation();
+                } else {
+                    event.cancelBubble = true;
+                }
+            }
+        })();
+
+        // scroll 函数封装
+        function scroll() {
+            return {
+                //此函数的返回值是对象
+                left: window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop,
+                right: window.pageXOffset || document.body.scrollLeft || document.documentElement.scrollLeft,
+            };
+        }
+    </script>
+</body>
+
+</html>

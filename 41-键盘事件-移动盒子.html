@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动盒子</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background-image: linear-gradient(pink, green);
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        !(function () {
+            var box = document.querySelector("#box");
+
+            document.onkeydown = function (event) {
+                event = event || window.event;
+
+                var speed = 10;
+
+                if (event.ctrlKey) {
+                    speed = speed === 10 ? 20 : 10;
+                }
+
+                 /*
+                 * 37 左
+                 * 38 上
+                 * 39 右
+                 * 40 下
+                 */
+                switch (event.keyCode) {
+                    case 37:
+                        box.style.left = box.offsetLeft - speed + "px";
+                        break;
+                    case 39:
+                        box.style.left = box.offsetLeft + speed + "px";
+                        break;
+                    case 38:
+                        box.style.top = box.offsetTop - speed + "px";
+                        break;
+                    case 40:
+                        box.style.top = box.offsetTop + speed + "px";
+                        break;
+                }
+            }
+        })();
+    </script>
+</body>
+</html>
