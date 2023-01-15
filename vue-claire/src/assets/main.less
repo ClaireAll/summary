@@ -1,0 +1,64 @@
+@import './base.css';
+
+// 一些方法
+.background-color(@color, @alpha) {
+  background-color: fade(@color, @alpha);
+  filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr=@{ieColor},endColorstr=@{ieColor})";
+}
+
+.color(@color, @alpha) {
+  color: fade(@color, @alpha);
+}
+
+.opacity(@opa) {
+  opacity: @opa;
+  filter: ~'alpha(opacity=@{opa-ie})';
+}
+
+:root {
+  --themeColor: 122, 85, 5;
+}
+@theme: var(--themeColor);
+@Claire: #795405;
+
+#app {
+  font-weight: normal;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+a {
+  text-decoration: none;
+   &:-webkit-any-link {
+    color: inherit;
+   }
+}
+
+/* a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+} */
