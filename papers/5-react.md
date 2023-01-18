@@ -152,3 +152,21 @@ componentWillUpdate(nextProps, nextState) {
     1. Redux应用只能有一个store
     2. getState()：获取state
     3. dispatch(action)：更新state
+
+### 路由Router6.0
+（https://kalacloud.com/blog/react-router-tutorial/）
+1. 安装
+```npm install react-router-dom```
+
+2. react-router相关标签(常用标签)
+BrowserRouter
+Link
+Routes
+Route
+Outlet
+
+3. Navigate
+替代Redirect,通过to指定要默认打开的页面
+```html
+    <Route path={'/'} element={<Navigate to={'/about'} />} />
+```
