@@ -1,3 +1,21 @@
+- [搭建开发环境](#搭建开发环境)
+- [一些注意点](#一些注意点)
+- [不可变性](#不可变性)
+- [MVC模式](#mvc模式)
+- [JSX](#jsx)
+- [为什么要使用React？](#为什么要使用react)
+- [虚拟DOM（Virtual Dom）](#虚拟domvirtual-dom)
+- [diff算法](#diff算法)
+- [react创建组件](#react创建组件)
+- [生命周期（Component Lifecycle）](#生命周期component-lifecycle)
+  - [组件生命周期 - 创建阶段(Mounting)](#组件生命周期---创建阶段mounting)
+  - [组件生命周期 - 运行阶段（Updating）](#组件生命周期---运行阶段updating)
+  - [组件生命周期 - 卸载阶段（Unmounting）](#组件生命周期---卸载阶段unmounting)
+- [redux](#redux)
+- [路由Router6.0](#路由router60)
+- [Router获取当前页路径](#router获取当前页路径)
+- [Router设置默认页路径(如 404 页)](#router设置默认页路径如-404-页)
+
 
 ### 搭建开发环境
 ```
@@ -57,14 +75,21 @@ https://blog.csdn.net/TwoBE9876/article/details/121339272
 ### 生命周期（Component Lifecycle）
 + 创建阶段（Mounting）
     >constructor()
+
     >componentWillMount()
+
     >render()
+
     >componentDidMount()
 + 运行和交互阶段（Updating）
     >componentWillReceiveProps()
+
     >shouldComponentUpdate()
+
     >componentWillUpdate()
+
     >render()
+
     >componentDidUpdate()
 + 卸载阶段（Unmounting）
     >componentWillUnmount()
@@ -169,4 +194,34 @@ Outlet
 替代Redirect,通过to指定要默认打开的页面
 ```html
     <Route path={'/'} element={<Navigate to={'/about'} />} />
+```
+
+### Router获取当前页路径
+使用```useLocation```这个hook
+``` javascript
+    import { useLocation } from 'react-router-dom'
+
+    const About = () => {
+    // 使用 hook
+    const location = useLocation();
+    const { from, pathname } = location
+
+    return <div>你当前在 {pathname}，你是从 {from} 跳转过来的</div>
+    }
+```
+
+### Router设置默认页路径(如 404 页)
+在最后加入 path 为 * 的一个路径，意为匹配所有路径
+```javascript
+    function App() {
+
+        return <BrowserRouter>
+            <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="*" element={<NotFound />} />
+            </Routes>
+        </BrowserRouter>
+    }
 ```
