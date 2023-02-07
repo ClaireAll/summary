@@ -3,6 +3,6 @@
 
 <template>
   <main>
-    <div>Home</div>
+    <div>Something about Vue</div>
   </main>
 </template>

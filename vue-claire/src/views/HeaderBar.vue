@@ -11,6 +11,7 @@ export default {
             const reg = /\((.+?)\)/g;
             const formatColor = color.match(reg)![0];
             document.getElementsByTagName("body")[0].style.setProperty(`--themeColor`, formatColor.substring(1, formatColor.length - 1));
+            document.getElementsByTagName("body")[0].style.setProperty(`--el-menu-hover-bg-color`, formatColor.substring(1, formatColor.length - 1));
         }
     },
 }
