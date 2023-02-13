@@ -1,4 +1,11 @@
-
+- [C/S架构和B/S架构](#cs架构和bs架构)
+- [B/S架构 Browser/Server  浏览器  服务器  web兴起之后的一种架构](#bs架构-browserserver--浏览器--服务器--web兴起之后的一种架构)
+- [服务器分类](#服务器分类)
+- [PHP支持的数据类型](#php支持的数据类型)
+- [常见的请求头](#常见的请求头)
+- [请求体](#请求体)
+- [响应](#响应)
+- [抓包工具](#抓包工具)
 
 ### C/S架构和B/S架构
 
@@ -69,3 +76,11 @@ header('location:www.baidu.com')
 + User-Agent:浏览器的具体类型  如Mozilla/5.0
 + Accept:浏览器支持哪些数据类型  如Accept: text/html
 
+### 请求体
++ 如果是往服务器提交数据，需要在请求头中设置```Content-Type: application/x-www-form-urlencoded```
+
+### 响应
++ 响应行、响应头、响应主体
+
+### 抓包工具
+常见的抓包工具有：whistle、Fiddler、Charles。

@@ -78,4 +78,34 @@
     </table>
 </body>
 
+<script>
+    // 封装ajax
+    function myAjax(url, success, fail) {
+        var xmlHttp;
+        if (window.XMLHttpRequest) {
+            xmlHttp = new XMLHttpRequest();
+        } else {
+            // 兼容IE5、6
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xmlHttp.open('GET', url, true);
+        xmlHttp.send();
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                var obj = JSON.parse(xmlHttp.responseText);
+                success && success(xmlHttp.responseText);
+            } else {
+                fail && fail(new Error('接口请求失败'));
+            }
+        }
+    }
+
+    !(function () {
+        myAjax('../php/1-for3.php', (res) => {
+            console.log(122);
+        });
+    })();
+</script>
+
 </html>

@@ -1,9 +1,9 @@
 function fn(a) {
-  console.log(a);
+  console.log(1, a);
   var a = 666;
-  console.log(a);
+  console.log(2, a);
   function a() {}
-  console.log(a);
+  console.log(3, a);
   var b = function () {};
   console.log(b);
   function c() {}
