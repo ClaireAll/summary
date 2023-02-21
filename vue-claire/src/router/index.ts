@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Paper from "../views/Paper.vue";
+import Table from "../views/Table.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,6 +15,11 @@ const router = createRouter({
       path: "/paper",
       name: "paper",
       component: Paper,
+    },
+    {
+      path: "/table",
+      name: "table",
+      component: Table,
     },
     // {
     //   path: "/css",

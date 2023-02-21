@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取json数据</title>
+</head>
+<body>
+    <h2>获取json数据</h2>
+    <input type="button" value="获取json" id="btn" />
+</body>
+<script type="text/javascript">
+    document.querySelector('#btn').onclick = function () {
+        var ajax = new XMLHttpRequest();
+        ajax.open('get', '../php/3-for43.php');
+        ajax.send();
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                console.log(ajax.responseText);
+                var jsObj = JSON.parse(ajax.responseText);
+
+                var str = `<ul><li>${jsObj.name}</li><li>${jsObj.skill}</li><li>${jsObj.friend}</li></ul>`;
+
+                document.body.innerHTML = str;
+            }
+        }
+    };
+</script>
+</html>

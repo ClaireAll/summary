@@ -7,6 +7,9 @@
         <el-menu-item index="2">
             <RouterLink to="/paper">vue md</RouterLink>
         </el-menu-item>
+        <el-menu-item index="4">
+            <RouterLink to="/table">Table</RouterLink>
+        </el-menu-item>
         <el-sub-menu index="3" class="sub-menu">
             <template #title>Css</template>
             <el-menu-item index="3-1">选项1</el-menu-item>

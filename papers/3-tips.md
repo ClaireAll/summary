@@ -48,3 +48,45 @@
             }
         }
 ```
+
+### js内存泄漏
+1. 循环引用
+  ```javascript
+    let obj1 = {};
+    let obj2 = {};
+    obj1.next = obj2;
+    obj2.prev = obj1;
+
+    obj1 = null;
+    obj2 = null;
+
+    <!-- 将 obj1 和 obj2 设置为 null 以打破循环引用，但由于垃圾收集器无法打破循环引用，因此对象将在不再需要后很长时间内保留在内存中，从而导致内存泄漏。为了避免这种类型的内存泄漏，我们可以使用一种称为“手动内存管理”的技术，通过使用 JavaScript 的 delete 关键字来删除创建循环引用的属性。 -->
+
+    delete obj1.next;
+    delete obj2.prev;
+
+  ```
+2. 事件监听器
+  ```javascript
+    let button = document.getElementById("my-button");
+    button.addEventListener("click", function() {
+        console.log("Button was clicked!");
+    });
+
+    <!-- 方法一： -->
+    button.removeEventListener("click", function() {
+        console.log("Button was clicked!");
+    });
+    <!-- 方法二： -->
+    button.removeAllListeners();
+  ```
+3. 全局变量
+   使用let const，在一定区域内使用
+
+### 手动内存管理的最佳实践
+1. 使用弱引用
+   weakMap、weakSet
+   ```let weakMap = new WeakMap(); weakMap.set(object1, "some data");```
+2. 使用垃圾收集器 API
+   ```gc()```
+3. 使用堆快照和分析器
