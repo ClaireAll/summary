@@ -25,3 +25,6 @@ console.log(array4.map(Number));  // [12, 1, 3.1415, -10.01]
 const array6 = [1, 2, 3, 4, 5];
 array6.slice(-1);
 console.log(array6);
+
+// 复制内容到剪贴板
+const copyToClipboard = (text) => navigator.clipboard.writeText(text);

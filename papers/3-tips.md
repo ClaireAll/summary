@@ -90,3 +90,41 @@
 2. 使用垃圾收集器 API
    ```gc()```
 3. 使用堆快照和分析器
+   ```javascript
+    <!-- 在执行将大数据推送到数组的循环之前和之后拍摄两个堆快照，然后，比较这两个快照以识别在循环期间创建的对象。 接着，我们可以分析差异以查看哪些对象使用了最多的内存，这可以帮助我们识别由大数据引起的内存泄漏。 -->
+    let snapshot1 = performance.heapSnapshot();
+    // Do some actions that might cause memory leaks
+    for (let i = 0; i < 100000; i++) {
+      myArray.push({
+        largeData: new Array(1000000).fill("some data"),
+        id: i
+      });
+    }
+
+    let snapshot2 = performance.heapSnapshot();
+    let diff = snapshot2.compare(snapshot1);
+    diff.forEach(function(item) {
+      if (item.size > 1000000) {
+        console.log(item.name);
+      }
+    });
+
+    <!-- 使用 JavaScript 分析器来开始和停止跟踪我们应用程序的性能。该报告将显示有关已调用函数的信息以及每个函数的内存使用情况。 -->
+    let profiler = new Profiler();
+    profiler.start();
+    // do some actions that might cause memory leaks
+    for (let i = 0; i < 100000; i++) {
+      myArray.push({
+        largeData: new Array(1000000).fill("some data"),
+        id: i,
+      });
+    }
+    profiler.end();
+    let report = profiler.report();
+    // analyze the report to identify areas where memory usage is high
+    for (let func of report) {
+      if (func.memory > 1000000) {
+        console.log(func.name);
+      }
+    }
+   ```
