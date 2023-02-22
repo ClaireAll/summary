@@ -1,101 +1,113 @@
 <template>
-    <el-row>
-        <el-col :span="7">
-            <el-card class="box-card first-letter">
-                <template #header>
-                    <div class="card-header">
-                        <h3>首字母下降</h3>
+    <el-container>
+        <el-row>
+            <el-col :span="7">
+                <el-card class="box-card first-letter">
+                    <template #header>
+                        <div class="card-header">
+                            <h3>首字母下降</h3>
+                        </div>
+                    </template>
+                    <p>Banana</p>
+                    <p>Apple</p>
+                </el-card>
+            </el-col>
+            <el-col :span="7">
+                <el-card class="box-card img-word">
+                    <template #header>
+                        <div class="card-header">
+                            <h3>图文环绕</h3>
+                        </div>
+                    </template>
+                    <div class="left"></div>
+                    <div class="right"></div>
+                    <p>
+                        Sometimes a web page's text content appears to be
+                        funneling your attention towards a spot on the page to
+                        drive you to follow a particular link. Sometimes you
+                        don't notice.
+                    </p>
+                </el-card></el-col
+            >
+            <el-col :span="7">
+                <el-card class="box-card img-shadow">
+                    <template #header>
+                        <div class="card-header">
+                            <h3>透明图像的阴影</h3>
+                        </div>
+                    </template>
+                    <p>box-shadow</p>
+                    <img
+                        class="box-shadow"
+                        src="https://stackdiary.com/wp-content/uploads/2022/02/logo.png"
+                        alt="box-shadow example (transparent)"
+                    />
+                    <p>drop-shadow</p>
+                    <img
+                        class="drop-shadow"
+                        src="https://stackdiary.com/wp-content/uploads/2022/02/logo.png"
+                        alt="drop-shadow example (transparent)"
+                    />
+                </el-card>
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="7">
+                <el-card class="box-card word-type">
+                    <template #header>
+                        <div class="card-header">
+                            <h3>文字打字效果</h3>
+                        </div>
+                    </template>
+                    <div class="typing-effect">Typing effect for text</div>
+                </el-card>
+            </el-col>
+            <el-col :span="7">
+                <el-card class="box-card list">
+                    <template #header>
+                        <div class="card-header">
+                            <h3>列表清单</h3>
+                        </div>
+                    </template>
+                    <div class="checklist">
+                        <h2>Item Checklist with CSS</h2>
+                        <label>
+                            <input type="checkbox" name="" />
+                            <i></i>
+                            <span>Item #1</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="" />
+                            <i></i>
+                            <span>Item #2</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="" />
+                            <i></i>
+                            <span>Item #3</span>
+                        </label>
                     </div>
-                </template>
-                <p>Banana</p>
-                <p>Apple</p>
-            </el-card>
-        </el-col>
-        <el-col :span="7">
-            <el-card class="box-card img-word">
-                <template #header>
-                    <div class="card-header">
-                        <h3>图文环绕</h3>
-                    </div>
-                </template>
-                <div class="left"></div>
-                <div class="right"></div>
-                <p>Sometimes a web page's text content appears to be funneling your attention towards a spot on the page to
-                    drive you to follow a particular link. Sometimes you don't notice.</p>
-            </el-card></el-col>
-        <el-col :span="7">
-            <el-card class="box-card img-shadow">
-                <template #header>
-                    <div class="card-header">
-                        <h3>透明图像的阴影</h3>
-                    </div>
-                </template>
-                <p>box-shadow</p>
-                <img class="box-shadow" src="https://stackdiary.com/wp-content/uploads/2022/02/logo.png"
-                    alt="box-shadow example (transparent)">
-                <p>drop-shadow</p>
-                <img class="drop-shadow" src="https://stackdiary.com/wp-content/uploads/2022/02/logo.png"
-                    alt="drop-shadow example (transparent)">
-            </el-card>
-        </el-col>
-    </el-row>
-    <el-row>
-        <el-col :span="7">
-            <el-card class="box-card word-type">
-                <template #header>
-                    <div class="card-header">
-                        <h3>文字打字效果</h3>
-                    </div>
-                </template>
-                <div class="typing-effect">Typing effect for text</div>
-            </el-card>
-        </el-col>
-        <el-col :span="7">
-            <el-card class="box-card list">
-                <template #header>
-                    <div class="card-header">
-                        <h3>列表清单</h3>
-                    </div>
-                </template>
-                <div class="checklist">
-                    <h2>Item Checklist with CSS</h2>
-                    <label>
-                        <input type="checkbox" name="" />
-                        <i></i>
-                        <span>Item #1</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="" />
-                        <i></i>
-                        <span>Item #2</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="" />
-                        <i></i>
-                        <span>Item #3</span>
-                    </label>
-                </div>
-            </el-card>
-        </el-col>
-        <el-col :span="7">
-            <el-card class="box-card word-border">
-                <template #header>
-                    <div class="card-header">
-                        <h3>文字描边</h3>
-                    </div>
-                </template>
-                <p>Hello World</p>
-            </el-card>
-        </el-col>
-    </el-row>
+                </el-card>
+            </el-col>
+            <el-col :span="7">
+                <el-card class="box-card word-border">
+                    <template #header>
+                        <div class="card-header">
+                            <h3>文字描边</h3>
+                        </div>
+                    </template>
+                    <p>Hello World</p>
+                </el-card>
+            </el-col>
+        </el-row>
+    </el-container>
 </template>
 <script lang="ts">
 export default {
     data() {
-        return {};
+        return {}
     },
-    methods: {
-    },
+    methods: {},
 }
 </script>
 <style lang="less" scoped>
@@ -117,11 +129,9 @@ li {
         font-size: 200%;
         color: #8a2be2;
     }
-
 }
 
 .img-word {
-
     .left,
     .right {
         width: 40%;
@@ -172,7 +182,7 @@ li {
         border-right: 2px solid;
         font-family: monospace;
         font-size: 20px;
-        animation: typing 2s steps(23), effect .5s step-end infinite alternate;
+        animation: typing 2s steps(23), effect 0.5s step-end infinite alternate;
     }
 
     @keyframes typing {
@@ -213,7 +223,7 @@ li {
         cursor: pointer;
     }
 
-    input[type="checkbox"] {
+    input[type='checkbox'] {
         -webkit-appearance: none;
     }
 
@@ -226,7 +236,7 @@ li {
         border: 2px solid #fff;
     }
 
-    input[type="checkbox"]:checked~i {
+    input[type='checkbox']:checked ~ i {
         top: 6px;
         height: 7px;
         width: 14px;
@@ -254,13 +264,13 @@ li {
         transition: transform 0.5s;
     }
 
-    input[type="checkbox"]:checked~span:before {
+    input[type='checkbox']:checked ~ span:before {
         transform: translateY(-50%) scaleX(1);
         transform-origin: right;
         transition: transform 0.5s;
     }
 
-    input[type="checkbox"]:checked~span {
+    input[type='checkbox']:checked ~ span {
         color: #154e6b;
     }
 }
