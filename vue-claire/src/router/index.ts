@@ -4,6 +4,7 @@ import Paper from "../views/Paper.vue";
 import Table from '../views/components/Table.vue';
 import Skill from '../views/js/Skill.vue';
 import CssSkill from '../views/css/Skill.vue';
+import CssTest from '../views/css/CssTest.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,11 @@ const router = createRouter({
           path: '/cssSkill',
           name: 'cssSkill',
           component: CssSkill,
+        },
+        {
+          path: '/cssTest',
+          name: 'cssTest',
+          component: CssTest,
         },
       ],
     },

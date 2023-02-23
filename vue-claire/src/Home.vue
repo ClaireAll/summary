@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import Catalogue from "./views/Catalogue.vue";
-import HeaderBar from "./views/HeaderBar.vue";
-
+import Catalogue from './views/Catalogue.vue'
+import HeaderBar from './views/HeaderBar.vue'
 </script>
 
 <template>
@@ -10,7 +9,6 @@ import HeaderBar from "./views/HeaderBar.vue";
             <Catalogue />
         </el-aside>
         <el-container>
-
             <el-header class="header">
                 <HeaderBar />
             </el-header>

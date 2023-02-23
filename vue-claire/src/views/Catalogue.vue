@@ -9,8 +9,11 @@
         </el-menu-item>
         <el-sub-menu index="3" class="sub-menu">
             <template #title>Css</template>
-            <el-menu-item index="5-1">
+            <el-menu-item index="3-1">
                 <RouterLink to="/cssSkill">Some Skill</RouterLink>
+            </el-menu-item>
+            <el-menu-item index="3-2">
+                <RouterLink to="/cssTest">CSS Test</RouterLink>
             </el-menu-item>
         </el-sub-menu>
         <el-sub-menu index="4" class="sub-menu">

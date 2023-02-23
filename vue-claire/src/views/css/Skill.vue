@@ -1,5 +1,5 @@
 <template>
-    <el-container>
+    <div>
         <el-row>
             <el-col :span="7">
                 <el-card class="box-card first-letter">
@@ -100,7 +100,7 @@
                 </el-card>
             </el-col>
         </el-row>
-    </el-container>
+    </div>
 </template>
 <script lang="ts">
 export default {
