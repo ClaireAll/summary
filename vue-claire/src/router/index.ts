@@ -5,6 +5,7 @@ import Table from '../views/components/Table.vue';
 import Skill from '../views/js/Skill.vue';
 import CssSkill from '../views/css/Skill.vue';
 import CssTest from '../views/css/CssTest.vue';
+import Form from '../views/components/Form.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,6 +44,11 @@ const router = createRouter({
           path: "/table",
           name: "table",
           component: Table,
+        },
+        {
+          path: "/form",
+          name: "form",
+          component: Form,
         },
       ],
     },

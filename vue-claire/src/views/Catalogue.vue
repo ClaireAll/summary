@@ -21,6 +21,9 @@
             <el-menu-item index="4-1">
                 <RouterLink to="/table">Table</RouterLink>
             </el-menu-item>
+            <el-menu-item index="4-2">
+                <RouterLink to="/form">Form</RouterLink>
+            </el-menu-item>
         </el-sub-menu>
         <el-sub-menu index="5" class="sub-menu">
             <template #title>js/ts</template>

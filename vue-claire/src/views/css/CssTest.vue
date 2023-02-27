@@ -200,13 +200,171 @@
                 </el-card>
             </el-col>
         </el-row>
+        <el-row>
+            <el-col :span="7">
+                <el-card class="box-card canvas1">
+                    <template #header>
+                        <h3>Canvas尝试</h3>
+                    </template>
+                    <canvas class="myCanvas">
+                        <p>Sorry, your browser does not support Canvas</p>
+                    </canvas>
+                </el-card>
+            </el-col>
+            <el-col :span="7">
+                <el-card class="box-card canvas2">
+                    <template #header>
+                        <h3>Canvas绘制三角形</h3>
+                    </template>
+                    <canvas class="myCanvas2">
+                        <p>Sorry, your browser does not support Canvas</p>
+                    </canvas>
+                </el-card>
+            </el-col>
+            <el-col :span="7">
+                <el-card class="box-card canvas3">
+                    <template #header>
+                        <h3>Canvas绘制圆弧</h3>
+                    </template>
+                    <canvas class="myCanvas3">
+                        <p>Sorry, your browser does not support Canvas</p>
+                    </canvas>
+                </el-card>
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="17">
+                <el-card class="box-card canvas-img">
+                    <template #header>
+                        <h3>Canvas图片</h3>
+                    </template>
+                    <canvas class="myCanvas4">
+                        <p>Sorry, your browser does not support Canvas</p>
+                    </canvas>
+                </el-card>
+            </el-col>
+            <el-col :span="7">
+                <el-card class="box-card">
+                    <template #header>
+                        <h3></h3>
+                    </template>
+                </el-card>
+            </el-col>
+            <!-- <el-col :span="7">
+                <el-card class="box-card">
+                    <template #header>
+                        <h3></h3>
+                    </template>
+                </el-card>
+            </el-col> -->
+        </el-row>
     </div>
 </template>
 <script>
-import Table from '../components/Table.vue'
 export default {
-    components: { Table },
-}
+    mounted() {
+        this.drawCanvas1();
+        this.drawCanvas3();
+        this.drawCanvas4();
+    },
+
+    methods: {
+        drawCanvas1: () => {
+            const degToRad = (degrees) => (degrees * Math.PI) / 180;
+            const canvas = document.querySelector('.myCanvas');
+            const width = 240;
+            const height = 180;
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = 'rgb(0,0,0)';
+            ctx.fillRect(0, 0, width, height);
+            ctx.fillStyle = 'rgb(255,0,0)';
+            ctx.fillRect(50, 50, 100, 50);
+            ctx.fillStyle = 'rgba(0, 250, 0)';
+            ctx.fillRect(75, 75, 50, 50);
+            ctx.fillStyle = 'rgba(255, 0, 255, 0.75)';
+            ctx.fillRect(50, 100, 50, 50);
+            ctx.strokeStyle = 'rgb(255, 255, 255)';
+            ctx.lineWidth = 5;
+            ctx.strokeRect(25, 25, 50, 50);
+            ctx.fillStyle = '#fff';
+            ctx.beginPath();
+            ctx.moveTo(150, 50);
+            // 绘制路径
+            ctx.fill();
+
+            // 画一个等边三角形
+            const canvas2 = document.querySelector('.myCanvas2');
+            canvas2.width = width;
+            canvas2.height = height;
+            const ctx2 = canvas2.getContext('2d');
+            ctx2.fillStyle = 'rgb(255, 0, 0)';
+            ctx2.beginPath();
+            ctx2.moveTo(50, 50);
+            ctx2.lineTo(150, 50);
+            const triHeight = 50 * Math.tan(degToRad(60));
+            ctx2.lineTo(100, 50 + triHeight);
+            ctx2.lineTo(50, 50);
+            ctx2.fill();
+        },
+
+        drawCanvas3: () => {
+            const degToRad = (degrees) => (degrees * Math.PI) / 180;
+            const canvas = document.querySelector('.myCanvas3');
+            const width = 240;
+            const height = 180;
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = 'yellowGreen';
+            ctx.beginPath();
+            ctx.arc(100, 50, 50, degToRad(-45), degToRad(45), true);
+            ctx.lineTo(100, 50);
+            ctx.fill();
+            ctx.strokeStyle = 'green';
+            ctx.lineWidth = 1;
+            ctx.font = '36px arial';
+            ctx.strokeText('Canvas text', 0, 100);
+
+            ctx.fillStyle = 'green';
+            ctx.font = '48px georgia';
+            ctx.fillText('Canvas text', 0, 150);
+        },
+
+        drawCanvas4: () => {
+            const canvas = document.querySelector('.myCanvas4');
+            const width = 600;
+            const height = 600;
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.translate(width / 2, height / 2); // 移动画布中心
+
+            const degToRad = (degrees) => (degrees * Math.PI) / 180;
+            const rand = (min, max) =>
+                Math.floor(Math.random() * (max - min + 1)) + min;
+
+            let length = 250;
+            let moveOffset = 20;
+
+            for (let i = 0; i < length; i++) {
+                ctx.fillStyle = `rgba(${255 - length},0,${255 - length}, ${Math.random()}`;
+                ctx.beginPath();
+                ctx.moveTo(moveOffset, moveOffset);
+                ctx.lineTo(moveOffset + length, moveOffset);
+                var triHeight = (length / 2) * Math.tan(degToRad(60));
+                ctx.lineTo(moveOffset + length / 2, moveOffset + triHeight);
+                ctx.lineTo(moveOffset, moveOffset);
+                ctx.fill();
+
+                length--;
+                moveOffset += 0.7;
+                ctx.rotate(degToRad(5));
+            }
+        },
+    },
+};
 </script>
 <style lang="less" scoped>
 h3 {
@@ -318,6 +476,7 @@ div {
         -webkit-animation-timing-function: ease-in-out;
         -webkit-animation-iteration-count: infinite;
         -webkit-animation-duration: 2s;
+        padding-left: 6px;
     }
 
     p::selection {
@@ -351,11 +510,13 @@ div {
     background: linear-gradient(#e66465, #9198e5);
     box-sizing: border-box;
     border-radius: 10px;
-    box-shadow: 2px 2px 4px rgb(36, 36, 36), inset 2px 2px 4px white, inset -2px -2px 4px rgb(36, 36, 36);
+    box-shadow: 2px 2px 4px rgb(36, 36, 36), inset 2px 2px 4px white,
+        inset -2px -2px 4px rgb(36, 36, 36);
     &:hover {
         background: linear-gradient(#ff9898, #bcc2ff);
         cursor: pointer;
         text-shadow: 2px 2px #676ca0;
+        font-family: youshe;
     }
 }
 </style>
