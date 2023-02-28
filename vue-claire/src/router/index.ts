@@ -6,6 +6,8 @@ import Skill from '../views/js/Skill.vue';
 import CssSkill from '../views/css/Skill.vue';
 import CssTest from '../views/css/CssTest.vue';
 import Form from '../views/components/Form.vue';
+import ElementAttr from '../views/js/ElementAttr.vue';
+import ScrollAnimation from '../views/css/ScrollAnimation.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +36,11 @@ const router = createRouter({
           name: 'cssTest',
           component: CssTest,
         },
+        {
+          path: '/scrollAnimation',
+          name: 'ScrollAnimation',
+          component: ScrollAnimation,
+        },
       ],
     },
     {
@@ -53,13 +60,18 @@ const router = createRouter({
       ],
     },
     {
-      path: '/ts',
-      name: 'ts',
+      path: '/js',
+      name: 'js',
       children: [
         {
           path: '/skill',
           name: 'skill',
           component: Skill,
+        },
+        {
+          path: '/elementAttr',
+          name: 'ElementAttr',
+          component: ElementAttr,
         },
       ],
     },

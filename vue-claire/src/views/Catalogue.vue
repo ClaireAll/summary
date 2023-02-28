@@ -15,6 +15,9 @@
             <el-menu-item index="3-2">
                 <RouterLink to="/cssTest">CSS Test</RouterLink>
             </el-menu-item>
+            <el-menu-item index="3-3">
+                <RouterLink to="/scrollAnimation">ScrollAnimation</RouterLink>
+            </el-menu-item>
         </el-sub-menu>
         <el-sub-menu index="4" class="sub-menu">
             <template #title>Components</template>
@@ -29,6 +32,9 @@
             <template #title>js/ts</template>
             <el-menu-item index="5-1">
                 <RouterLink to="/skill">Some Skill</RouterLink>
+            </el-menu-item>
+            <el-menu-item index="5-2">
+                <RouterLink to="/elementAttr">ElementAttr</RouterLink>
             </el-menu-item>
         </el-sub-menu>
     </el-menu>
