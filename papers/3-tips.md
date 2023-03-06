@@ -129,5 +129,90 @@
     }
    ```
 
-   ### e2e测试
-   关注一个完整的操作链能否完成。
+### e2e测试
+关注一个完整的操作链能否完成。
+
+### 常用ts程序类型
+1. 所有属性设置为可选
+  ``` typescript
+  type Partial<T> = {
+    [P in keyof T]?: T[P]
+  };
+  ```
+2. 由设置为必需的 Type 的所有属性组成，与 Partial 相反。
+  ```typescript
+  type Required<T> = {
+      [P in keyof T]-?: T[P];
+  };
+
+  type User = {
+    name?: string;
+    password?: string;
+  };
+  type RequiredUser = Required<User>;
+  ```
+
+3. 构造一个 Type 的所有属性都设置为只读的类型，这意味着不能重新分配构造类型的属性。
+  ```typescript
+  type Readonly<T> = {
+    readonly [P in keyof T]: T[P];
+  };
+  ```
+
+4. 构造一个对象类型，其属性键为 Keys，其属性值为 Type，该实用程序可用于将一种类型的属性映射到另一种类型。
+  ```typescript
+  type Record<K extends keyof any, T> = {
+    [P in K]: T;
+  };
+
+  type User = {
+    name: string;
+    password: string;
+  };
+  type UserIds = 1000 | 1001 | 1002;
+  type UserMap1 = {
+    1000: User;
+    1001: User;
+    1002: User;
+  };
+  type UserMap = Record<UserIds, User>;
+  ```
+
+5. 通过从 UnionType 中排除所有可分配给 ExcludedMembers 的联合成员来构造一个类型。
+   ```typescript
+   type Exclude<T, U> = T extends U ? never : T;
+   ```
+6. 通过从 Type 中提取可分配给 Union 的所有联合成员来构造一个类型。
+   ```typescript
+   type Extract<T, U> = T extends U ? T : never;
+   ```
+
+7. 通过从 Type 中选择一组属性键（字符串文字或字符串文字的并集）来构造一个类型。
+   ```typescript
+    type Pick<T, K extends keyof T> = {
+    	[P in K]: T[P];
+    };
+   ```
+
+8. 通过从 Type 中选择所有属性然后删除键（字符串文字或字符串文字的并集）来构造一个类型。
+   ```typescript
+   type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
+   ```
+
+9. 通过从 Type 中排除 null 和 undefined 来构造一个类型。
+    ```typescript
+	type NonNullable<T> = T extends null | undefined ? never : T;
+	```
+
+10. 根据函数类型 Type 的参数中使用的类型构造元组类型。
+    ```typescript
+	type Parameters<T extends (...args: any) => any> = T extends
+  		(...args: infer P) => any ? P : never;
+	```
+
+
+### ??=
+只有当??=左侧的值为undefined、null时，才会把右侧的值赋给左侧，否则左侧不会被赋值
+
+### ??
+只有当??左侧为null或undefined时，才会返回右侧的值，否则返回左侧值

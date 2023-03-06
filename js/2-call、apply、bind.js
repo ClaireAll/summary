@@ -40,6 +40,15 @@ const son1 = new Son("Claire", 24);
 console.log(JSON.stringify(son1));
 
 console.log("------------\n------------");
+
+
+
+
+
+
+
+
+
 /**
  * apply() 方法的作用：可以调用一个函数，与此同时，它还可以改变这个函数内部的 this 指向。这一点，和 call()类似。
  * fn1.apply(想要将this指向哪里, [函数实参1, 函数实参2]);
@@ -56,6 +65,10 @@ const minValue = Math.min.apply(Math, arr1); // 求数组 arr1 中元素的最�
 console.log(minValue);
 
 console.log("------------\n------------");
+
+
+
+
 /**
  * bind() 方法不会调用函数，但是可以改变函数内部的 this 指向。
  * 新函数 = fn1.bind(想要将this指向哪里, 函数实参1, 函数实参2);
