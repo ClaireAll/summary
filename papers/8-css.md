@@ -64,3 +64,76 @@
 + arc(圆心x, 圆心y, 半径, 圆弧start角度, 圆弧end角度, 方向(false 顺时针 true 逆时针)) 0°设定为水平向右
 + fillText(text, x, y): 绘制有填充色的文本
 + strokeText(): 绘制文本外边框(描边)
+
+### pointer-events
++ pointer-events: auto;  该元素的行为与没有指定指针-事件属性时一样
++ pointer-events: none;  除去该元素的指针事件
++ pointer-events: visiblePainted; /* SVG only */
++ pointer-events: visibleFill; /* SVG only */
++ pointer-events: visibleStroke; /* SVG only */
++ pointer-events: visible; /* SVG only */
++ pointer-events: painted; /* SVG only */
++ pointer-events: fill; /* SVG only */
++ pointer-events: stroke; /* SVG only */
++ pointer-events: all; /* SVG only */
+
+### clip-path
+创建了一个剪裁区域，设定了一个元素的哪一部分应该被显示。在该区域内的部分被显示出来，而在区域外的部分则被隐藏。
++ url():一个引用SVG <clipPath>元素的URL()。
+
+一些形状
++ inset() 内嵌矩形
++ circle(80px at 50% 50%)
++ ellipse(closest-side farther-side at 30%) 椭圆
++ polygon(50% 0, 100% 50%, 50% 100%, 0 50%) 多边形
++ path()
+
+### caret-color
+定义**插入光标**的颜色
+
+### animation
++ **animation-name**
++ **animation-duration**  持续时间
++ **animation-timing-function**  曲线
+  + linear 匀速
+  + ease（默认） 低速开始->加速->结束前减速
+  + ease-in  低速开始
+  + ease-out 低速结束
+  + ease-in-out 以低速开始和结束
+  + cubic-bezier(n,n,n,n) 在cubic-bezier函数中自己的值 贝塞尔曲线
++ **animation-delay** 5s  等待5s后动画开始
++ **animation-iteration-count** 1  播放次数
+  + xx
+  + infinite
++ **animation-direction**: alternate  设置动画为反向播放
+  + normal  执行完一次后回到起点执行下一次
+  + alternate  往返动画
+  + reverse 反向执行
++ **animation-fill-mode**  动画结束最后一帧
+  + none
+  + forwards 元素结束状态保持动画最后一帧的样式
+  + backwards 让元素等待状态的时候显示动画第一帧的样式
+  + both 等待状态显示第一帧，结束状态保持最后一帧
++ **animation-play-state** 动画是否暂停
+  + running  执行动画
+  + paused  暂停动画
+
+
+### transform
++ rotate 旋转
+  + rotate(xx deg) 2d 顺时针旋转  为负数表述逆时针
+  + rotateX() 3d 以中心为基点
+  + rotateY() 3d
++ skew 扭曲
+  + skew(x, y) 以中心为基点，第一个参数是水平方向的扭曲角度，第二个参数是垂直方向的扭曲角度
+  + skewX(x)
+  + skewY(y)
++ scale 缩放
+  + scale(x, y)
+  + scaleX(x, 1)
+  + scaleY(1, y)
++ translate 移动
+  + translate(x, y)
+  + translateX(x)
+  + translateY(y)
++ matrix 矩阵变形

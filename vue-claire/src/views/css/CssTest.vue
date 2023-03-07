@@ -199,6 +199,45 @@
                     </table>
                 </el-card>
             </el-col>
+            <el-col :span="5">
+                <el-card class="box-card pointer-events">
+                    <template #header>
+                        <h3>pointer-event</h3>
+                    </template>
+                    <div style="position: relative; height: 150px">
+                        <input
+                            type="button"
+                            style="
+                                position: absolute;
+                                left: 0;
+                                top: 0;
+                                width: 100px;
+                                height: 100px;
+                                background: pink;
+                                border: none;
+                            "
+                            value=""
+                            onclick="console.log(123)"
+                        />
+                        <input
+                            type="button"
+                            style="
+                                position: absolute;
+                                left: 25px;
+                                top: 25px;
+                                width: 50px;
+                                height: 50px;
+                                background: purple;
+                                border: none;
+                                pointer-events: none;
+                            "
+                            value=""
+                            onclick="console.log(456)"
+                        />
+                        <p style="top: 120px">点击紫色会透过</p>
+                    </div>
+                </el-card>
+            </el-col>
         </el-row>
         <el-row>
             <el-col :span="7">
@@ -244,19 +283,62 @@
                 </el-card>
             </el-col>
             <el-col :span="7">
-                <el-card class="box-card">
-                    <template #header>
-                        <h3></h3>
-                    </template>
+                <el-card class="box-card clip-path">
+                    <template #header><h3>clip-path</h3></template>
+                    <div>
+                        <ul style="margin-left: -40px">
+                            <li>
+                                <el-button link @click="changeClipPath('none')"
+                                    >none</el-button
+                                >
+                            </li>
+                            <li>
+                                <el-button link @click="changeClipPath('inset')"
+                                    >inset(10px)</el-button
+                                >
+                            </li>
+                            <li>
+                                <el-button
+                                    link
+                                    @click="changeClipPath('inset2')"
+                                    >inset(20px 20px 50px round 15px)</el-button
+                                >
+                            </li>
+                            <li>
+                                <el-button
+                                    link
+                                    @click="changeClipPath('circle')"
+                                    >circle(80px at 50% 50%)</el-button
+                                >
+                            </li>
+                            <li>
+                                <el-button
+                                    link
+                                    @click="changeClipPath('ellipse')"
+                                    >ellipse(80px 100px at 50% 50%)</el-button
+                                >
+                            </li>
+                            <li>
+                                <el-button
+                                    link
+                                    @click="changeClipPath('polygon')"
+                                    >polygon(50% 0, 100% 50%, <br />50% 100%, 0
+                                    50%)</el-button
+                                >
+                            </li>
+                        </ul>
+                        <div class="clip-box"></div>
+                    </div>
                 </el-card>
             </el-col>
-            <!-- <el-col :span="7">
-                <el-card class="box-card">
+            <el-col :span="7">
+                <el-card class="box-card animation-test">
                     <template #header>
-                        <h3></h3>
+                        <h3>animation</h3>
                     </template>
+                    <div class="animation-box"></div>
                 </el-card>
-            </el-col> -->
+            </el-col>
         </el-row>
     </div>
 </template>
@@ -349,7 +431,9 @@ export default {
             let moveOffset = 20;
 
             for (let i = 0; i < length; i++) {
-                ctx.fillStyle = `rgba(${255 - length},0,${255 - length}, ${Math.random()}`;
+                ctx.fillStyle = `rgba(${255 - length},0,${
+                    255 - length
+                }, ${Math.random()}`;
                 ctx.beginPath();
                 ctx.moveTo(moveOffset, moveOffset);
                 ctx.lineTo(moveOffset + length, moveOffset);
@@ -361,6 +445,44 @@ export default {
                 length--;
                 moveOffset += 0.7;
                 ctx.rotate(degToRad(5));
+            }
+        },
+
+        changeClipPath: (shape) => {
+            const clipPathDiv = document.querySelector('.clip-box');
+            switch (shape) {
+                case 'none':
+                    clipPathDiv.setAttribute('style', 'clip-path: none;');
+                    break;
+                case 'inset':
+                    clipPathDiv.setAttribute('style', 'clip-path: inset(10px)');
+                    break;
+                case 'inset2':
+                    clipPathDiv.setAttribute(
+                        'style',
+                        'clip-path: inset(20px 20px 50px round 15px)'
+                    );
+                    break;
+                case 'circle':
+                    clipPathDiv.setAttribute(
+                        'style',
+                        'clip-path: circle(80px at 50% 50%)'
+                    );
+                    break;
+                case 'ellipse':
+                    clipPathDiv.setAttribute(
+                        'style',
+                        'clip-path: ellipse(80px 100px at 50% 50%)'
+                    );
+                    break;
+                case 'polygon':
+                    clipPathDiv.setAttribute(
+                        'style',
+                        'clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%)'
+                    );
+                    break;
+                default:
+                    break;
             }
         },
     },
@@ -517,6 +639,50 @@ div {
         cursor: pointer;
         text-shadow: 2px 2px #676ca0;
         font-family: youshe;
+    }
+}
+
+.clip-box {
+    width: 200px;
+    height: 200px;
+    background-color: pink;
+}
+
+.animation-test {
+    height: 300px;
+    .animation-box {
+        width: 100px;
+        height: 100px;
+        background-color: yellowgreen;
+        animation: boxChange 3s linear infinite;
+    }
+
+    @keyframes boxChange {
+        25% {
+            border-radius: 25px;
+            transform: translate(50px, 50px);
+            background-color: aquamarine;
+        }
+        50% {
+            width: 80px;
+            height: 80px;
+            transform: rotate(40deg);
+            border-radius: 40px;
+            background-color: pink;
+        }
+
+        75% {
+            transform: scale(1.5);
+            border-radius: 25px;
+            background-color: purple;
+        }
+
+        100% {
+            width: 100px;
+            height: 100px;
+            border-radius: 0;
+            background-color: yellowgreen;
+        }
     }
 }
 </style>
