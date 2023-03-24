@@ -9,6 +9,7 @@
 
 ### node核心：异步流程控制
 Node.js是为异步而生的，它自己把复杂的事儿做了（高并发，低延时），交给用户的只是有点难用的Callback写法。
+NodeJS使用CMD模块系统，主模块作为程序入口点，所有模块在执行过程中只初始化一次。
 
 ### node工具框架
 npm、gulp 这样的前端工具类
@@ -233,3 +234,46 @@ util是一个Nodejs核心模块，提供常用函数的集合。
 + util.isArray
 + util.isRegExp: 判断是否是正则
 + util.isDate
+
+
+### Nodejs文件系统 fs
+fs模块中的方法均有异步和同步，如读取文件：异步fs.readFile()，同步fs.readFileSync()
+异步的方法函数最后一个参数为回调函数，回调函数的第一个参数包含了错误信息(error)。
++ 打开文件 fs.open(path, flags[, mode], callback)
+    + path - 文件的路径。
+    + flags - 文件打开的行为。(r、r+、rs、rs+、w、wx、w+、wx+、a、ax、a+、ax)
+    + mode - 设置文件模式(权限)，文件创建默认权限为 0666(可读，可写)。
+    + callback - 回调函数，带有两个参数如：callback(err, fd)。
++ 获取文件信息 fs.stat(path, callback)
++ 写入文件 fs.writeFile(file, data[, options], callback)
+    + file - 文件名或文件描述符。
+    + data - 要写入文件的数据，可以是 String(字符串) 或 Buffer(缓冲) 对象。
+    + options - 该参数是一个对象，包含 {encoding, mode, flag}。默认编码为 utf8, 模式为 0666 ， flag 为 'w'
+    + callback - 回调函数，回调函数只包含错误信息参数(err)，在写入失败时返回。
++ 读取文件  fs.read(fd, buffer, offset, length, position, callback)
+    + fd - 通过 fs.open() 方法返回的文件描述符。
+    + buffer - 数据写入的缓冲区。
+    + offset - 缓冲区写入的写入偏移量。
+    + length - 要从文件中读取的字节数。
+    + position - 文件读取的起始位置，如果 position 的值为 null，则会从当前文件指针的位置读取。
+    + callback - 回调函数，有三个参数err, bytesRead, buffer，err 为错误信息， bytesRead 表示读取的字节数，buffer 为缓冲区对象。
++ 关闭文件 fs.close(fd, callback)
++ 截取文件 fs.ftruncate(fd, len, callback)
++ 删除文件 fs.unlink(path, callback)
++ 创建目录 fs.mkdir(path[, options], callback)
++ 读取目录 fs.readdir(path, callback)
++ 删除目录 fs.rmdir(path, callback)
+
+
+### 工具模块
+|模块名	|描述
+|:-|:-
+|OS 模块	|提供基本的系统操作函数。
+|Path 模块	|提供了处理和转换文件路径的工具。
+|Net 模块	|用于底层的网络通信。提供了服务端和客户端的的操作。
+|DNS 模块	|用于解析域名。
+|Domain 模块	|简化异步代码的异常处理，可以捕捉处理try catch无法捕捉的。
+
+### 零散知识
++ process是一个全局变量，可通过process.argv获得命令行参数。由于argv[0]固定等于NodeJS执行程序的绝对路径，argv[1]固定等于主模块的绝对路径，因此第一个命令行参数从argv[2]这个位置开始。
++ 官方文档API： https://nodejs.org/api/buffer.html
