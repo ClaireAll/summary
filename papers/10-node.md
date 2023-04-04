@@ -277,3 +277,21 @@ fs模块中的方法均有异步和同步，如读取文件：异步fs.readFile(
 ### 零散知识
 + process是一个全局变量，可通过process.argv获得命令行参数。由于argv[0]固定等于NodeJS执行程序的绝对路径，argv[1]固定等于主模块的绝对路径，因此第一个命令行参数从argv[2]这个位置开始。
 + 官方文档API： https://nodejs.org/api/buffer.html
+
+### express框架
+思考:不使用Express 能否创建Web服务器?
+答案;能，使用Node.js提供的原生http模块即可。
+
+
+思考:既生瑜何生亮(有了http内置模块，为什么还有用Express) ?
+答案: http 内置模块用起来很复杂，开发效率低;Express是基于内置的 http模块进一步封装出来的，能够快速创建web服务器
+
+
+思考: http内置模块与Express是什么关系?
+答案:类似于浏览器中 Web API和jQuery的关系。后者是基于前者进一步封装出来的。
+
+对于前端程序员来说，最常见的两种服务器，分别是:
+Web网站服务器:专门对外提供 Web 网页资源的服务器。
+
+API接口服务器:专门对外提供API接口的服务器。
+使用Express，我们可以方便、快速的创建Web 网站的服务器或API接口的服务器。
