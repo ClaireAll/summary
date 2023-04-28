@@ -15,6 +15,8 @@
 - [路由Router6.0](#路由router60)
 - [Router获取当前页路径](#router获取当前页路径)
 - [Router设置默认页路径(如 404 页)](#router设置默认页路径如-404-页)
+- [hook](#hook)
+- [父组件调用子组件的方法](#父组件调用子组件的方法)
 
 
 ### 搭建开发环境
@@ -225,3 +227,49 @@ Outlet
         </BrowserRouter>
     }
 ```
+
+### hook
+只在组件的顶层调用 Hooks
+
+只从React函数中调用Hooks
+
++ useState
+
+    这个钩子需要一个可选的参数，一个状态（state）的初始值。
++ useEffect
+
+    可以把 useEffectHook 看作是componentDidMount、componentDidUpdate 和 componentWillUnmount 生命周期方法在一个函数中的结合。
+    ```typescript
+    useEffect(() => {
+        console.log(`${product} will rule the world!`);
+    }, [product]); // Only re-run the effect if the value of product changes
+    ```
++ useContext
+
+    它为你提供了一种方法，使整个应用程序中的所有组件都能访问特定的数据，无论它们的嵌套有多深。
+    ```export const UserContext = React.createContext(users);```
+    ```const users = useContext(UserContext);```
+
+    ```const value = useContext(SomeContext);```
++ useReducer
+
+    useReducer是 useState Hooks 的一个替代品。不同的是，它允许更复杂的逻辑和涉及多个子值的状态更新
+    ```const [state, dispatch] = useReducer(reducer, initialState);```
+    + state：这是传递给 Hook 的 initialState 的当前值。
+    + reducer：reducer 是一个接受状态和动作的函数。基于这些参数，它决定了状态的值将如何变化。
+    + dispatch：调用函数是我们将动作传递给 reducer 函数，它分配动作以用于更新状态。
+
++ useRef
+
+    + 首先，声明一个 initial value 为 null 的 ref 对象```const inputRef = useRef(null);```
+    + 然后将你的 ref 对象作为 ref 属性传递给你想要操作的 DOM 节点的 JSX ```return <input ref={inputRef} />;```
+    + 当 React 创建 DOM 节点并将其渲染到屏幕时，React 将会把 DOM 节点设置为你的 ref 对象的 current 属性。现在你可以访问 <input> 的 DOM 节点，并且可以调用类似于 focus() 的方法：```inputRef.current.focus();```
+
++ useImperativeHandle
+
+    useImperativeHandle 是 React 中的一个 Hook，它能让你自定义由 ref 暴露出来的句柄。
+    ```useImperativeHandle(ref, createHandle, dependencies?)```
+
+
+### 父组件调用子组件的方法
+https://www.cnblogs.com/muamaker/p/11647626.html

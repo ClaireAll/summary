@@ -1,3 +1,17 @@
+- [filter(滤镜)](#filter滤镜)
+- [git撤回已经提交的push](#git撤回已经提交的push)
+- [16进制转rgb颜色](#16进制转rgb颜色)
+- [js内存泄漏](#js内存泄漏)
+- [手动内存管理的最佳实践](#手动内存管理的最佳实践)
+- [e2e测试](#e2e测试)
+- [常用ts程序类型](#常用ts程序类型)
+- [??=](#)
+- [??](#-1)
+- [compilerOptions选项](#compileroptions选项)
+- [如何在react工程里使用阿里图标库的图标](#如何在react工程里使用阿里图标库的图标)
+- [原型/原型链](#原型原型链)
+
+
 ### filter(滤镜)
 
 + none: 默认值。
@@ -273,3 +287,28 @@
   }
 }
 ```
+
+### 如何在react工程里使用阿里图标库的图标
+1. 阿里图标库找到图标，添加进自己的项目
+2. 进入项目，左上角选Symbol，点击“收起在线链接”
+3. 记得批量去色
+4. 复制代码类似于“//at.alicdn.com/t/c/font_4012350_z9rj1mqd3e.js”
+5. 按照 [官方文档](https://ant.design/components/icon-cn#%E8%87%AA%E5%AE%9A%E4%B9%89-icon) 引入
+
+
+### 原型/原型链
+proto、prototype、constructor
+
++ js对象分为：普通对象、函数对象
++ *__proto__*和*constructor*是对象独有的。*prototype*是函数独有的。在js中，函数也是对象，所有函数也有*__proto__*和*constructor*
++ *constructor*，该对象的构造函数.*prototype*.*constructor* === 该构造函数本身
++ 一个对象的*__proto__*指向其构造函数的prototype，函数创建的对象.*__proto__* === 该函数.*prototype*
+
+
+
+
+
+
+
+
+
