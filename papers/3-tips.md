@@ -10,6 +10,7 @@
 - [compilerOptions选项](#compileroptions选项)
 - [如何在react工程里使用阿里图标库的图标](#如何在react工程里使用阿里图标库的图标)
 - [原型/原型链](#原型原型链)
+- [端口被占用](#端口被占用)
 
 
 ### filter(滤镜)
@@ -304,7 +305,11 @@ proto、prototype、constructor
 + *constructor*，该对象的构造函数.*prototype*.*constructor* === 该构造函数本身
 + 一个对象的*__proto__*指向其构造函数的prototype，函数创建的对象.*__proto__* === 该函数.*prototype*
 
-
+### 端口被占用
+```
+netstat -ano|findstr "3000"
+taskkill -PID 16556 -f
+```
 
 
 

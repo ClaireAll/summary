@@ -1,5 +1,7 @@
 import Color from 'color';
 
-const color = Color("rgba(0,9,8,.3)");
+const color = Color("#e7eaf3");
 console.log(color.rgb().array());
-console.log(`(${[1,2,3].join(',')})`)
+console.log(color.fade(0.25).hexa());
+console.log(color.fade(0.25).rgb().array());
+console.log(color.rgb().array());
