@@ -11,6 +11,14 @@
 - [如何在react工程里使用阿里图标库的图标](#如何在react工程里使用阿里图标库的图标)
 - [原型/原型链](#原型原型链)
 - [端口被占用](#端口被占用)
+- [cookie、localStorage、sessionStorage、indexedDB](#cookielocalstoragesessionstorageindexeddb)
+- [ts tips](#ts-tips)
+- [Symbol](#symbol)
+- [\_lodash中好用的函数](#_lodash中好用的函数)
+- [getBoundingClientRect()](#getboundingclientrect)
+- [intersectionObserver](#intersectionobserver)
+- [createNodeIterator()](#createnodeiterator)
+- [requestAnimationFrame()](#requestanimationframe)
 
 
 ### filter(滤镜)
@@ -311,9 +319,159 @@ netstat -ano|findstr "3000"
 taskkill -PID 16556 -f
 ```
 
+### cookie、localStorage、sessionStorage、indexedDB
+|特性|cookie|localStorage|sessionStorage|indexDB
+|:-|:-|:-|:-|:-
+|数据生命周期|一般由服务器生成，可以设置过期时间；前端采用js-cookie等组件也可以生成|除非被清理，否则一直存在；浏览器关闭依然保存再本地，但是不支持跨浏览器|页面关闭就清理刷新，不支持跨浏览器|除非被清理，否则一直存在
+|数据存储大小|4k|5M|5M|不限大小
+|与服务端通信|每次都会携带在请求的header中，同时由于请求携带，容易有安全问题|不参与|不参与|不参与
+|特点|字符串键值对在本地存储数据|字符串键值对在本地存储数据|字符串键值对在本地存储数据|indexDB是一个非关系型数据库（不支持通过SQL语句操作）。可以存储大量数据，提供接口来查询，还可以建立索引，这些都是其它存储方案无法提供的能力
+
+### ts tips
++ 类型关系
+![关系图](./../img/ts-1.png)
 
 
+### Symbol
++ Symbol是js中的原始数据类型之一，它表示一个唯一的、不可变的值，通常用作对象属性的键值。
++ Symbol.length = 0
++ Symbol.for(): 根据给定的字符串key，返回一个已经存在的symbol值。如果不存在，则会创建一个新的Symbol值并将其注册到全局Symbol注册表中。当我们需要使用一个全局唯一的Symbol值时，可以使用Symbol.for()方法来获取或创建该值。
+  ```javascript
+  const symbol1 = Symbol.for('foo');
+  const symbol2 = Symbol.for('foo');
+
+  console.log(symbol1 === symbol2); // true
+
+  ```
++ Symbol.keyFor(): 会返回一个已经存在的Symbol值的key。如果给定的Symbol值不存在于全局Symbol注册表中，则返回undefined。
++ Symbol(): 返回一个新的、唯一的Symbol值。可以使用可选参数description来为Symbol值添加一个描述信息。
+
+### _lodash中好用的函数
++ chunk 将一个数组按照指定的大小分割成若干数组，返回一个新的二维数组
+  ```javascript
+  const arr = ['a', 'b', 'c', 'd', 'e'];
+  console.log(_.chunk(arr, 3)); // [['a', 'b', 'c'], ['d', 'e']]
+  ```
++ compact 将数组中的falsy值去除（false、null、0、""、undecided、NaN）
+  ```javascript
+  const arr = ['a', 0, '', null, undefined, NaN, 'b'];
+  console.log(_.compact(arr)); // ['a', 'b']
+  ```
++ difference 返回两个数组之间的差异 在第一个数组中但不在第二个数组中的所有值组成的数组
++ drop 从数据中删除前面指定的n个元素
+  ```javascript
+  const arr = [1, 2, 3, 4, 5];
+  console.log(_.drop(arr, 2)); // [3, 4, 5]
+  ```
++ dropRight
++ intersection 返回两个或多个数组之间的交集
+  ```javascript
+  const arr1 = ['a', 'b'];
+  const arr2 = ['b', 'c'];
+  const arr3 = ['b', 'd'];
+  console.log(_.intersection(arr1, arr2, arr3)); // ['b']
+  ```
++ omit 删除一个对象中指定的属性，并返回一个新的对象
++ pick 选择一个对象中指定的属性，并返回一个新的对象
++ capitalize 将第一个字符转换大写，其余转换小写
++ repeat 将一个字符串重复n次，并返回一个新字符串 _.repeat(string = '', [n=1])
++ memoize(func, [resolver]) 对一个函数进行记忆处理，缓存该函数的计算结果
++ curry(func, [arity = func.length]) 将一个函数转换为柯里化函数，即逐步传入参数并返回一个新函数
 
 
+### getBoundingClientRect()
++ 一个用于获取元素位置和尺寸信息的方法。返回一个DOMRect对象，提供了元素的大小和其相对于视口的位置。
++ x：元素左边距相对于视口的x坐标
++ y：元素右边距相对于视口的y坐标
++ width：元素的宽度
++ height：元素的高度
++ top：元素上边界相对于视口顶部的距离。
++ right：元素右边界相对于视口左侧的距离。
++ bottom：元素下边界相对于视口顶部的距离。
++ left：元素左边界相对于视口左侧的距离
++ 这个方法通常用于需要获取元素在视口中的位置和尺寸信息的场景，比如实现拖拽、定位或响应式布局等，兼容性很好，一般用滚动事件比较多。
++ 判断一个容器是否出现在可视窗口内：
+  ```JavaScript
+  const box = document.getElementById('box');
+  window.onscroll = function () {
+    console.log(checkInView(box));
+  }
 
+  function checkInView(dom) {
+    const { top, left, bottom, right } = dom.getBoundingClientRect();
+    return top > 0 && left > 0 && bottom <= (window.innerHeight || document.documentElement.clientHeight) && right <= (window.innerWidth || document.documentElement.clientWidth);
+  }
+  ```
+  ![图示](./../img/getBoundingClientRect.png)
 
+### intersectionObserver
++ 是一个构造函数，接受两个参数，第一个参数是回调函数，第二个参数动是一个对象。这个方法用于观察元素相交情况，它可以异步地监听一个或多个目标元素与其祖先元素或视口之间的交叉状态。它提供了一种有效的方法来检测元素是否可见或进入视口。
+1. 创建一个 IntersectionObserver 实例，传入一个回调函数和可选的配置对象。
+  ```javascript
+  const observer = new IntersectionObserver(callback, options);
+  const callback = (entries, observer) => {
+    // 处理交叉状态变化的回调函数
+  }
+
+  const options = {
+    // 可选配置
+  };
+  ```
+2. 将要观察的元素添加到观察者中
+  ```javascript
+  const target = document.querySelector('#targetElement');
+  observer.observe(target);
+  ```
+3. 在回调函数中处理交叉状态的变化
+  ```javascript
+  const callback = (entries, observer) => {
+    entries.foreach(entry => {
+      if (entry.inIntersecting) {
+        // 元素进入视口
+      } else {
+        // 元素离开视口
+      }
+    })
+  }
+  ```
++ entries 参数是一个包含每个目标元素交叉状态信息的数组。每个 entry 对象都有以下属性：
+
++ target：观察的目标元素。
++ intersectionRatio：目标元素与视口的交叉比例，值在 0 到 1 之间。
++ isIntersecting：目标元素是否与视口相交。
++ intersectionRect：目标元素与视口的交叉区域的位置和尺寸信息。
+
++ options 对象是可选的配置，其中常用的配置选项包括：
+
++ root：指定观察器的根元素，默认为视口。
++ rootMargin：设置根元素的外边距，用于扩大或缩小交叉区域。
++ threshold：指定交叉比例的阈值，可以是单个数值或由多个数值组成的数组。
+
++ IntersectionObserver 适用于实现懒加载、无限滚动、广告展示和可视化统计等场景，同样可以判断元素是否在某一个容器内，不会引起回流。
+
+### createNodeIterator()
++ DOM API中的一个方法，用户创建一个NodeIterator对象，可以用于遍历文档树种的一组DOM节点。通俗一点来讲就是它可以遍历 DOM 结构，把 DOM 变成可遍历的。
+
+### requestAnimationFrame()
++ 在下一次浏览器重绘之前调用指定函数的方法，它是HTML5提供的API
++ requestAnimationFrame的调用频率通常为每秒60次。这意味着我们可以在每次重绘之前更新动画的状态，并确保动画流畅运行，而不会对浏览器的性能造成影响。setInterval与setTimeout它可以让我们在指定的时间间隔内重复执行一个操作，不会考虑浏览器的重绘，而是按照指定的时间间隔执行回调函数，可能会被延迟执行，从而影响动画的流畅度。
++ 我们设置了两个容器，分别用requestAnimationFrame()方法和setTimeout方法进行平移效果，Js 代码如下所示：
+```javascript
+  let distance = 0
+  let box = document.getElementById('box')
+  let box2 = document.getElementById('box2')
+
+  window.addEventListener('click', function () {
+
+    requestAnimationFrame(function move() {
+      box.style.transform = `translateX(${distance++}px)`
+      requestAnimationFrame(move)//递归
+    })
+
+  setTimeout(function change() {
+    box2.style.transform = `translateX(${distance++}px)`
+      setTimeout(change, 17)
+        }, 17)
+  })
+
+```
